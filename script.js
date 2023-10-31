@@ -18,4 +18,22 @@ function div(a,b){
     }
 }
 
-console.log(div(5,6));
+var firstNum;
+var scndNum;
+var operator;
+
+function operate(a,b,operator){
+    switch(operator){
+        case "+":
+            add(a,b);
+            break;
+        case "-":
+            sub(a,b);
+            break;
+        case "*":
+            multi(a,b);
+        case "/":
+            div(a,b);
+    }
+
+}
