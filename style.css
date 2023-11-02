@@ -1,9 +1,18 @@
-.container{
-    padding-top: 200px;
+body{
     display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container{
+    margin-top: 200px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    display: flex;
+    width: 500px;
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    border: solid;
 }
 
 .row{
@@ -12,12 +21,60 @@
 
 }
 
-.size{
-    height: 50px;
-    width: 50px;
+.btn{
+    height: 100px;
+    width: 100px;
     border: solid;
     padding: 5px;
     text-align: center;
-    vertical-align: middle;
-    line-height: 50px; 
+    font-size: x-large;
+    font-weight: 500;
+   
+}
+
+.equal{
+    height: 100px;
+    width: 100px;
+    border: solid;
+    padding: 5px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.clear{
+    height: 100px;
+    width: 100px;
+    border: solid;
+    padding: 5px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.number{
+    background-color: bisque;
+}
+
+.clear{
+    background-color: rgb(223, 131, 131);
+    font-weight: bold;
+}
+
+.screen{
+    border: solid;
+    width: 410px;
+    height: 100px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    
+}
+
+.line{
+    height: 50%;
+    text-align: center;
+    padding-right: 10px;
+    font-size: xx-large;
 }
