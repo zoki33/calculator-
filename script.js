@@ -22,7 +22,7 @@ var temp = "";
 var firstNum;
 var scndNum;
 var operator;
-var result; 
+var result;
 
 function operate(a, b, operator) {
     switch (operator) {
@@ -59,25 +59,25 @@ numbers.forEach((num) => num.addEventListener(('click'), () => {
 
 const ops = document.querySelectorAll('.op');
 var counter = 0;
-ops.forEach((op) => op.addEventListener(('click'),() =>{
+ops.forEach((op) => op.addEventListener(('click'), () => {
     document.querySelector(".calculate").innerHTML += op.innerHTML;
     operator = op.innerHTML;
-    if(counter === 0){
-    firstNum = +temp;
-    temp = "";
-    counter++;
+    if (counter === 0) {
+        firstNum = +JSON.parse(JSON.stringify(temp));
+        temp = "";
+        counter++;
     }
-    else{
-        
+    else {
         firstNum = +result;
-        scndNum = +JSON.parse(JSON.stringify(temp));;
+        scndNum = +JSON.parse(JSON.stringify(temp));
         document.querySelector(".calculate").innerHTML = `${operator}`;
-        calculate();
+        document.querySelector(".result").innerHTML = operate(firstNum, scndNum, operator);
+
     }
-    
-    
+
+
 }
-))
+));
 
 const equals = document.querySelector('.equal');
 equals.addEventListener(('click'), calculate);
@@ -87,7 +87,7 @@ function calculate() {
     scndNum = +JSON.parse(JSON.stringify(temp));
 
     result = (operate(firstNum, scndNum, operator));
-    
+
     document.querySelector(".result").innerHTML = result;
 
     temp = "";
