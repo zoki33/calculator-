@@ -100,6 +100,7 @@ ops.forEach((op) => op.addEventListener(('click'), () => {
         calculate();
         temp = `${result}${op.innerHTML}`;
         document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+        doubleop = true;
         
         
         
@@ -131,9 +132,17 @@ function calculate() {
         }
         else{
             result = +result;
+            if (Number.isInteger(result)){
             document.querySelector(".result").innerHTML = result;
             doubleop = false;
             isError = false;
+            }
+            else{
+                result = (Number.parseFloat(+result.toFixed(9)));
+                document.querySelector(".result").innerHTML = result;
+                doubleop = false;
+                isError = false;
+            }
         }
         
     }
