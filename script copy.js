@@ -65,6 +65,7 @@ function deleteCharacter(){
         document.querySelector(".calculate").innerHTML = temp;
         doubleop = false;
     }
+    counter = 0;
     
 
 }
