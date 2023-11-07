@@ -22,6 +22,7 @@ var result;
 var temp ="";
 const operators = "+-/*";
 var doubleop = false;
+var isError = false;
 
 function operate(a, b, operator) {
     switch (operator) {
@@ -49,17 +50,37 @@ function clear(){
     temp = "";
     counter = 0;
     doubleop = false;
+    isError = false;
+    result = 0;
  
 }
+function deleteCharacter(){
+    let last = +temp[temp.length-1];
+    if(typeof last === "number" && !Number.isNaN(last)){
+    temp = temp.slice(0, temp.length - 1);
+    document.querySelector(".calculate").innerHTML = temp;
+    }
+    else{
+        temp = temp.slice(0, temp.length - 1);
+        document.querySelector(".calculate").innerHTML = temp;
+        doubleop = false;
+    }
+    
+
+}
+
+const delbutton = document.querySelector(".delete");
+delbutton.addEventListener('click', deleteCharacter);
 
 const clearbtn = document.querySelector(".clear");
 clearbtn.addEventListener('click', clear);
 
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((num) => num.addEventListener(('click'), () => {
-   
+    
     temp += num.innerHTML;
     document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+    doubleop = false;
 })
 
 );
@@ -68,16 +89,18 @@ var counter = 0;
 const ops = document.querySelectorAll('.op');
 ops.forEach((op) => op.addEventListener(('click'), () => {
 
-    if(counter === 0 && doubleop === false){
+    if(counter === 0 && doubleop === false && isError === false){
         temp += op.innerHTML;
         document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
         counter++;
+        doubleop = true;
         
     }
-    else if(doubleop === false){
+    else if(doubleop === false && isError === false){
         calculate();
         temp = `${result}${op.innerHTML}`;
         document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+        
         
         
     }
@@ -100,9 +123,9 @@ function calculate() {
         scndNum = +scndNum;
         result = operate(firstNum,scndNum,operator);
         if(result === "error" || result === undefined){
-            document.querySelector(".calculate").innerHTML = "";
+            document.querySelector(".calculate").innerHTML = temp;
             document.querySelector(".result").innerHTML = "error";
-            setTimeout(clear, 2000); 
+            isError = true;
             
 
         }
@@ -110,6 +133,7 @@ function calculate() {
             result = +result;
             document.querySelector(".result").innerHTML = result;
             doubleop = false;
+            isError = false;
         }
         
     }
