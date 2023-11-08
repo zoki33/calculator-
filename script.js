@@ -52,8 +52,17 @@ clearbtn.addEventListener('click', () => {
 
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((num) => num.addEventListener(('click'), () => {
+
     temp += num.innerHTML;
-    document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+    if (temp[temp.length-1] === "." && doubleDot === false){
+        document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+        doubleDot = true;
+    }
+    else{
+        document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+        doubleDot = false;
+    }
+    
 }));
 
 

@@ -23,6 +23,7 @@ var temp ="";
 const operators = "+-/*";
 var doubleop = false;
 var isError = false;
+var doubleDot = false;
 
 function operate(a, b, operator) {
     switch (operator) {
@@ -52,20 +53,33 @@ function clear(){
     doubleop = false;
     isError = false;
     result = 0;
+    doubleDot = false;
  
 }
 function deleteCharacter(){
-    let last = +temp[temp.length-1];
-    if(typeof last === "number" && !Number.isNaN(last)){
+
+    isError = false;
+    let last = temp[temp.length-1];
+    if(typeof +last === "number" && !Number.isNaN(+last)){
     temp = temp.slice(0, temp.length - 1);
     document.querySelector(".calculate").innerHTML = temp;
     }
-    else{
+    else if(last === "."){
+        temp = temp.slice(0, temp.length - 1);
+        document.querySelector(".calculate").innerHTML = temp;
+        doubleDot = false;
+        doubleop = false;
+    }
+    else if (operators.includes(last))
+    {
         temp = temp.slice(0, temp.length - 1);
         document.querySelector(".calculate").innerHTML = temp;
         doubleop = false;
+        counter = 0;
+        
+        
     }
-    counter = 0;
+    
     
 
 }
@@ -79,9 +93,23 @@ clearbtn.addEventListener('click', clear);
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((num) => num.addEventListener(('click'), () => {
     
-    temp += num.innerHTML;
-    document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
-    doubleop = false;
+    
+    if(num.innerHTML === "." && doubleDot === false){
+        temp += num.innerHTML;
+        document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+        doubleDot = true;
+        doubleop = true;
+        
+        
+    }
+    else if(num.innerHTML !== "."){
+        temp += num.innerHTML;
+        document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
+        doubleop = false;
+        
+    }
+    
+    
 })
 
 );
@@ -95,6 +123,7 @@ ops.forEach((op) => op.addEventListener(('click'), () => {
         document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
         counter++;
         doubleop = true;
+        doubleDot = false;
         
     }
     else if(doubleop === false && isError === false){
@@ -102,6 +131,7 @@ ops.forEach((op) => op.addEventListener(('click'), () => {
         temp = `${result}${op.innerHTML}`;
         document.querySelector(".calculate").innerHTML = JSON.parse(JSON.stringify(temp));
         doubleop = true;
+        doubleDot = false;
         
         
         
@@ -118,8 +148,9 @@ equals.addEventListener(('click'), calculate);
 function calculate() {
 
     stripper();
-    if (scndNum === ""){
+    if (scndNum === "" || scndNum === "."){
         document.querySelector(".result").innerHTML = "error";
+        isError = true;
     }
     else{
         scndNum = +scndNum;
