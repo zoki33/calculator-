@@ -34,16 +34,13 @@ body{
     text-align: center;
     font-size: xx-large;
     font-weight: 500;
-    font-family: Grimlord, Arial, Helvetica, sans-serif;
+    font-family: "Kdam Thmor Pro", sans-serif;
 }
 
-@font-face {
-    font-family: Grimlord;
-    src: url("https://fonts.cdnfonts.com/css/grimlord") format('truetype');
-}
+
 
 .title{
-    font-family: Grimlord;
+    font-family: "Kdam Thmor Pro", sans-serif;
     
 }
 
